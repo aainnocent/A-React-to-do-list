@@ -55,6 +55,8 @@ function App(props) {
     }
 
     function editTask(id, newName) {
+      
+      console.log(`Editing task with id: ${id}, newname: ${newName}`)
         const editedTaskList = tasks.map((tasks) => {
             if(id === tasks.id){
               return { ...tasks, name: newName}

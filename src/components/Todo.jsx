@@ -28,9 +28,13 @@ function Todo(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.editTask(props.id, newName);
-    setNewName("");
-    setEditing(false);
+    if(newName.trim()) {
+      props.editTask(props.id, newName);
+      setNewName("");
+      setEditing(false);
+    } else {
+      console.error('Task name can not be empty');
+    }
   }
   const editingTemplate = (
     <form className="stack-small" onSubmit={handleSubmit}>
@@ -93,7 +97,7 @@ function Todo(props) {
   useEffect(() => {
     if (!wasEditing && isEditing) {
       editFieldRef.current.focus();
-    } else if (wasEditing && isEditing) {
+    } else if (wasEditing && !isEditing) {
       editButtonRef.current.focus();
     }
   }, [wasEditing, isEditing]);
